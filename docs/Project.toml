@@ -1,0 +1,3 @@
+[deps]
+Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
+ModulationIndices = "4461f75b-faaf-4427-a3b2-dbd4d4c8324b"

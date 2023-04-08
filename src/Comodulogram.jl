@@ -2,7 +2,7 @@ export comodulogram, modulation_indices
 
 comodulogram(x::AbstractVector, method::Symbol=:tort; kwargs...) = comodulogram(x, Val(method); kwargs...)
 
-function comodulogram(x::AbstractVector, ::Val{:tort}; fs::Number=stepor(x, 1), fₚ=2:0.25:10, fₐ=25:1:100, dp=1, da=20)
+function comodulogram(x::AbstractVector, ::Val{:tort}; fs::Number=freqor(x, 1), fₚ=2:0.25:10, fₐ=25:1:100, dp=1, da=20)
     x = collect(x)
     fps = [[fₚ[i]-dp/2, fₚ[i]+dp/2] for i in 1:length(fₚ)]
     fas = [[fₐ[i]-da/2, fₐ[i]+da/2] for i in 1:length(fₐ)]

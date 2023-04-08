@@ -6,7 +6,8 @@ using ProgressLogging
 export surrogatecomodulogram
 import HypothesisTests.pvalue
 
-function surrogatecomodulogram(x, args...; fs=stepor(x, 1), n_sur=1000, fₚ=2:0.5:10, fₐ=25:5:100, surromethod=IAAFT(), kwargs...)
+function surrogatecomodulogram(x, args...; fs=freqor(x, 1), n_sur=1000, fₚ=2:0.5:10, fₐ=25:5:100, surromethod=IAAFT(), kwargs...)
+    x = collect(x)
     MI_sur = zeros(length(fₚ), length(fₐ), n_sur)
     @withprogress name="Surrogate PAC" begin
         threadlog, threadmax = (0, n_sur)

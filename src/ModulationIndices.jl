@@ -9,9 +9,17 @@ using Requires
 
 export analytic_signal
 
+function stepor(x, a)
+    if x isa AbstractDimArray && dims(x, 1) isa AbstractRange
+        return step(dims(a, 1))
+    else
+        return a
+    end
+end
+
 analytic_signal = Feature(hilbert, :analytic_signal, "Analytic signal computed via the Hilbert transform", ["amplitude,phase"])
 
-bandpass(x::Vector, fs=1; pass) = filtfilt(digitalfilter(Bandpass(pass...; fs), Butterworth(4)), x)
+bandpass(x::Vector, fs=stepor(x, 1); pass) = filtfilt(digitalfilter(Bandpass(pass...; fs), Butterworth(4)), x)
 
 include("Indices/Tort2010.jl")
 include("Comodulogram.jl")

@@ -20,10 +20,10 @@ function plotcomodulogram(MI, ps; p=0.001)
     y = dims(MI, 2) |> collect
     plt = heatmap!(ax, x, y, collect(MI));
     Colorbar(f[1, 2], plt, label="PAC");
-    p′ = log10.(ps) .- log10.(p)
+    p′ = log10.(ps)
     x = dims(p′, 1) |> collect
     y = dims(p′, 2) |> collect
-    contour!(ax, x, y, collect(p′), levels=[0], color=:white, linewidth=5)
+    contour!(ax, x, y, collect(p′), levels=[log10(p)], color=:white, linewidth=5)
     return f
 end
 

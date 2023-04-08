@@ -1,6 +1,8 @@
 using Makie
 using DimensionalData
 
+export plotcomodulogram
+
 function plotcomodulogram(MI::DimArray{<:Number, 2})
     f = Figure();
     ax = Axis(f[1, 1]; xlabel="Phase Frequency", ylabel="Amplitude Frequency");

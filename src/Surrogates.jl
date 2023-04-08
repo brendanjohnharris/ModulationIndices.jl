@@ -3,6 +3,8 @@ using HypothesisTests
 using MultipleTesting
 using ProgressLogging
 
+export surrogatecomodulogram
+import MultipleTesting.pvalue
 
 function surrogatecomodulogram(x, args...; fs=1, n_sur=1000, fₚ=2:0.5:10, fₐ=25:5:100, surromethod=IAAFT(), kwargs...)
     MI_sur = zeros(length(fₚ), length(fₐ), n_sur)
@@ -19,7 +21,7 @@ function surrogatecomodulogram(x, args...; fs=1, n_sur=1000, fₚ=2:0.5:10, fₐ
     return DimArray(MI_sur, (Dim{:fₚ}(fₚ), Dim{:fₐ}(fₐ), Dim{:surrogate}(1:n_sur)))
 end
 
-function pvalue(MI, MI_sur)
+function pvalue(MI::DimArray{<:Number, 2}, MI_sur::DimArray{<:Number, 3})
     ps = deepcopy(MI[At(collect(dims(MI_sur, 1))), At(collect(dims(MI_sur, 2)))])
     ps .= 1.0
     vals = Iterators.product(dims(ps)...) |> collect

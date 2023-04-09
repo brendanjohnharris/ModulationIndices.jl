@@ -18,7 +18,7 @@ function surrogatecomodulogram(x, args...; fs=freqor(x, 1), n_sur=1000, fₚ=2:0
             #     Threads.threadid() == 1 && (threadlog += Threads.nthreads())%10 == 0 && @logprogress threadlog/threadmax
             # end
         end
-    end
+    # end
     return DimArray(MI_sur, (Dim{:fₚ}(fₚ), Dim{:fₐ}(fₐ), Dim{:surrogate}(1:n_sur)))
 end
 

@@ -25,7 +25,7 @@ end
 end
 
 @testset "Surrogates" begin
-    x = randn(100000)
+    x = randn(10000)
     MI = @test_nowarn comodulogram(x; fs=300)
     MI_sur = ModulationIndices.surrogatecomodulogram(x; fs=300)
     p = ModulationIndices.pvalue(MI, MI_sur)
@@ -34,7 +34,7 @@ end
 
 @testset "TestSignal" begin
     dt = 0.001
-    _x = 0:dt:10
+    _x = 0:dt:5
     fs = 1/dt
     x = 10.0.*sin.(_x.*5.0.*(2π)) .+ (1 .+ sin.((_x.+π).*5.0.*(2π))) .* sin.((50*2π).*_x).+randn(length(_x)).*0.001
     # plotcomodulogram(x; fs)

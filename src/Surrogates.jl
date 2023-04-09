@@ -11,11 +11,11 @@ function surrogatecomodulogram(x, args...; fs=freqor(x, 1), n_sur=1000, fₚ=2:0
     MI_sur = zeros(length(fₚ), length(fₐ), n_sur)
     @withprogress name="Surrogate PAC" begin
         threadlog, threadmax = (0, n_sur)
-        Threads.@threads for i in 1:n_sur
+        for i in 1:n_sur # ? Threads.@threads
             @fastmath y = surrogate(x, surromethod)
             @fastmath MI_sur[:, :, i] .= comodulogram(y, args...; fs, fₚ, fₐ, kwargs...)
             if threadmax > 1
-                Threads.threadid() == 1 && (threadlog += Threads.nthreads())%1 == 0 && @logprogress threadlog/threadmax
+                Threads.threadid() == 1 && (threadlog += 1)%10 == 0 && @logprogress threadlog/threadmax # ? threadlog += Threads.nthreads()
             end
         end
     end

@@ -7,18 +7,18 @@ export surrogatecomodulogram
 import HypothesisTests.pvalue
 
 function surrogatecomodulogram(x, args...; fs=freqor(x, 1), n_sur=1000, fₚ=2:0.5:10, fₐ=25:5:100, surromethod=IAAFT(), kwargs...)
-    x = collect(x)
+    x = collect(x) .|> Float64 # TimeseriesSurrogates doesn't like float32
     MI_sur = zeros(length(fₚ), length(fₐ), n_sur)
-    # @withprogress name="Surrogate PAC" begin
-        # threadlog, threadmax = (0, n_sur)
-        for i in 1:n_sur # ? Threads.@threads
+    @withprogress name="Surrogate PAC" begin
+        threadlog, threadmax = (0, n_sur)
+        Threads.@threads for i in 1:n_sur
             @fastmath y = surrogate(x, surromethod)
             @fastmath MI_sur[:, :, i] .= comodulogram(y, args...; fs, fₚ, fₐ, kwargs...)
-            # if threadmax > 1
-            #     Threads.threadid() == 1 && (threadlog += Threads.nthreads())%10 == 0 && @logprogress threadlog/threadmax
-            # end
+            if threadmax > 1
+                Threads.threadid() == 1 && (threadlog += Threads.nthreads())%10 == 0 && @logprogress threadlog/threadmax
+            end
         end
-    # end
+    end
     return DimArray(MI_sur, (Dim{:fₚ}(fₚ), Dim{:fₐ}(fₐ), Dim{:surrogate}(1:n_sur)))
 end
 

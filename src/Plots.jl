@@ -1,11 +1,11 @@
-using Makie
+using ..Makie
 using DimensionalData
 
 export plotcomodulogram
 
 function plotcomodulogram(MI::DimArray{<:Number, 2})
     f = Figure();
-    ax = Axis(f[1, 1]; xlabel="Phase Frequency", ylabel="Amplitude Frequency");
+    ax = Axis(f[1, 1]; xlabel="Phase Frequency (Hz)", ylabel="Amplitude Frequency (Hz)");
     x = dims(MI, 1) |> collect
     y = dims(MI, 2) |> collect
     plt = heatmap!(ax, x, y, collect(MI));
@@ -15,7 +15,7 @@ end
 
 function plotcomodulogram(MI, ps; p=0.001)
     f = Figure();
-    ax = Axis(f[1, 1]; xlabel="Phase Frequency", ylabel="Amplitude Frequency");
+    ax = Axis(f[1, 1]; xlabel="Phase Frequency (Hz)", ylabel="Amplitude Frequency (Hz)");
     x = dims(MI, 1) |> collect
     y = dims(MI, 2) |> collect
     plt = heatmap!(ax, x, y, collect(MI));

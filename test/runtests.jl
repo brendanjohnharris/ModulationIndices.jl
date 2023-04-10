@@ -43,3 +43,15 @@ end
     p = @test_nowarn ModulationIndices.pvalue(MI, MI_sur)
     # plotcomodulogram(MI, MI_sur)
 end
+
+
+@testset "Float32" begin
+    dt = 0.001
+    _x = 0:dt:5
+    fs = 1/dt
+    x = 10.0.*sin.(_x.*5.0.*(2π)) .+ (1 .+ sin.((_x.+π).*5.0.*(2π))) .* sin.((50*2π).*_x).+randn(length(_x)).*0.001
+    x = x .|> Float32
+    MI = @test_nowarn comodulogram(x; fs)
+    MI_sur = @test_nowarn ModulationIndices.surrogatecomodulogram(x; fs, n_sur=10)
+    p = @test_nowarn ModulationIndices.pvalue(MI, MI_sur)
+end

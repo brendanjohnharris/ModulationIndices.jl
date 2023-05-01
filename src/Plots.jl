@@ -3,22 +3,22 @@ using DimensionalData
 
 export plotcomodulogram
 
-function plotcomodulogram(MI::DimArray{<:Number, 2})
+function plotcomodulogram(MI::DimArray{<:Number, 2}; kwargs...)
     f = Figure();
     ax = Axis(f[1, 1]; xlabel="Phase Frequency (Hz)", ylabel="Amplitude Frequency (Hz)");
     x = dims(MI, 1) |> collect
     y = dims(MI, 2) |> collect
-    plt = heatmap!(ax, x, y, collect(MI));
+    plt = heatmap!(ax, x, y, collect(MI); kwargs...);
     Colorbar(f[1, 2], plt, label="PAC");
     return f
 end
 
-function plotcomodulogram(MI, ps; p=0.001)
+function plotcomodulogram(MI, ps; p=0.001, kwargs...)
     f = Figure();
     ax = Axis(f[1, 1]; xlabel="Phase Frequency (Hz)", ylabel="Amplitude Frequency (Hz)");
     x = dims(MI, 1) |> collect
     y = dims(MI, 2) |> collect
-    plt = heatmap!(ax, x, y, collect(MI));
+    plt = heatmap!(ax, x, y, collect(MI); kwargs...);
     Colorbar(f[1, 2], plt, label="PAC");
     p′ = log10.(ps)
     x = dims(p′, 1) |> collect
@@ -27,16 +27,16 @@ function plotcomodulogram(MI, ps; p=0.001)
     return f
 end
 
-function plotcomodulogram(MI, MI_sur::DimArray{<:Number, 3}; p=0.001)
+function plotcomodulogram(MI, MI_sur::DimArray{<:Number, 3}; p=0.001, kwargs...)
     ps = ModulationIndices.pvalue(MI, MI_sur)
-    plotcomodulogram(MI, ps; p)
+    plotcomodulogram(MI, ps; p, kwargs...)
 end
 
 function plotcomodulogram(x; dosurr=false, kwargs...)
     MI = comodulogram(x; kwargs...)
     if dosurr
         MI_sur = surrogatecomodulogram(x; kwargs...)
-        plotcomodulogram(MI, MI_sur; kwargs...)
+        plotcomodulogram(MI, MI_sur)
     else
         plotcomodulogram(MI)
     end

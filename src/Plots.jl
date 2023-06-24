@@ -6,7 +6,7 @@ export plotcomodulogram
 function plotcomodulogram(args...; kwargs...)
     f = Figure();
     ax = Axis(f[1, 1]; xlabel="Phase Frequency (Hz)", ylabel="Amplitude Frequency (Hz)");
-    plotcomodulogram!(ax, args...; kwargs...)
+    plt = plotcomodulogram!(ax, args...; kwargs...)
     Colorbar(f[1, 2], plt, label="PAC");
     return f
 end
@@ -25,6 +25,7 @@ function plotcomodulogram!(ax, MI, ps; p=0.001, kwargs...)
     x = dims(p′, 1) |> collect
     y = dims(p′, 2) |> collect
     contour!(ax, x, y, collect(p′), levels=[log10(p)], color=:white, linewidth=5)
+    return plt
 end
 
 function plotcomodulogram!(ax, MI, MI_sur::DimArray{<:Number, 3}; p=0.001, kwargs...)

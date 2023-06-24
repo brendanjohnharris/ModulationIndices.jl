@@ -1,7 +1,7 @@
 name = "ModulationIndices"
 uuid = "4461f75b-faaf-4427-a3b2-dbd4d4c8324b"
 authors = ["brendanjohnharris <brendanjohnharris@gmail.com> and contributors"]
-version = "0.1.0"
+version = "0.1.1"
 
 [deps]
 Catch22 = "acdeb78f-3d39-4310-8fdf-6d75c17c6d5a"

@@ -28,7 +28,7 @@ function pvalue(MI::DimArray{<:Number, 2}, MI_sur::DimArray{<:Number, 3})
     vals = Iterators.product(dims(ps)...) |> collect
     for i in CartesianIndices(ps)
         v = vals[i]
-        ps[i] = SignedRankTest(collect(MI_sur[At(v[1]), At(v[2]), :]) .- MI[At(v[1]), At(v[2])]) |> x->HypothesisTests.pvalue(x; tail=:left)
+        ps[i] = SignedRankTest(collect(MI_sur[Near(v[1]), Near(v[2]), :]) .- MI[Near(v[1]), Near(v[2])]) |> x->HypothesisTests.pvalue(x; tail=:left)
     end
     ps[:] .= adjust(ps[:], BenjaminiHochberg())
     return ps

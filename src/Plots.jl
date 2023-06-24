@@ -7,6 +7,7 @@ function plotcomodulogram(args...; kwargs...)
     f = Figure();
     ax = Axis(f[1, 1]; xlabel="Phase Frequency (Hz)", ylabel="Amplitude Frequency (Hz)");
     plotcomodulogram!(ax, args...; kwargs...)
+    Colorbar(f[1, 2], plt, label="PAC");
     return f
 end
 
@@ -14,14 +15,12 @@ function plotcomodulogram!(ax, MI::DimArray{<:Number, 2}; kwargs...)
     x = dims(MI, 1) |> collect
     y = dims(MI, 2) |> collect
     plt = heatmap!(ax, x, y, collect(MI); kwargs...);
-    Colorbar(f[1, 2], plt, label="PAC");
 end
 
 function plotcomodulogram!(ax, MI, ps; p=0.001, kwargs...)
     x = dims(MI, 1) |> collect
     y = dims(MI, 2) |> collect
     plt = heatmap!(ax, x, y, collect(MI); kwargs...);
-    Colorbar(f[1, 2], plt, label="PAC");
     p′ = log10.(ps)
     x = dims(p′, 1) |> collect
     y = dims(p′, 2) |> collect

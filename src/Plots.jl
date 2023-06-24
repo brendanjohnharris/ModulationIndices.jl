@@ -3,7 +3,7 @@ using DimensionalData
 
 export plotcomodulogram
 
-function plotcomodulogram(args..., kwargs...)
+function plotcomodulogram(args...; kwargs...)
     f = Figure();
     ax = Axis(f[1, 1]; xlabel="Phase Frequency (Hz)", ylabel="Amplitude Frequency (Hz)");
     plotcomodulogram!(ax, args...; kwargs...)

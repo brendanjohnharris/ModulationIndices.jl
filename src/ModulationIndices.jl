@@ -1,6 +1,6 @@
 module ModulationIndices
 
-using Catch22
+using TimeseriesFeatures
 using DSP
 using Statistics
 using StatsBase
@@ -16,7 +16,7 @@ function stepor(x, a)
         return a
     end
 end
-freqor(x, a) = 1/stepor(x, a)
+freqor(x, a) = 1 / stepor(x, a)
 
 analytic_signal = Feature(hilbert, :analytic_signal, "Analytic signal computed via the Hilbert transform", ["amplitude,phase"])
 
@@ -27,7 +27,7 @@ include("Comodulogram.jl")
 include("Surrogates.jl")
 
 function __init__()
-    @require Makie="ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a" @eval include("./Plots.jl")
+    @require Makie = "ee78f7c6-11fb-53f2-987a-cfe4a2b5a57a" @eval include("./Plots.jl")
 end
 
 

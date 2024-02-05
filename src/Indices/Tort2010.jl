@@ -10,9 +10,16 @@ function tortbin(p; n=20)
     return ceil.(Int, p ./ w)
 end
 
-function _tort2010(b, a; n=20)
-    h = [mean(a[b.==i]) for i in 1:n] # Mean amplitude for each bin
+function tortprob(b, a; n=20)
+    is = [a[b.==i] for i in 1:n]
+    h = [mean(is[i]) for i in 1:n] # Mean amplitude for each bin
+    h[isnan.(h)] .= mean(h[.!isnan.(h)])
     h ./= sum(h)
+    return h
+end
+
+function _tort2010(b, a; n=20)
+    h = tortprob(b, a; n)
     u = fill(1 / n, n)
     return kldivergence(h, u, n)
 end

@@ -24,8 +24,8 @@ function _tort2010(b, a; n=20)
     return kldivergence(h, u, n)
 end
 
-function tort2010(p, a; kwargs...) # Bin number for each value of p
-    _tort2010(tortbin(p; kwargs...), a)
+function tort2010(p, a; n=20, kwargs...) # Bin number for each value of p
+    _tort2010(tortbin(p; n, kwargs...), a; n)
 end
 
 """

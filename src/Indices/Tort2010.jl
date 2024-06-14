@@ -1,10 +1,10 @@
 export tort2010
 
 function tortbin(p; n=20)
-    p = p .+ π # Assume we are wrapped -π to π
-    if minimum(p) < 0 || maximum(p) ≥ 2π
-        error("Phase values must be in the range 0 to 2π (not $(extrema(p))")
+    if minimum(p) < -π || maximum(p) ≥ π
+        error("Phase values must be in the range -π to π (not $(extrema(p))")
     end
+    p = p .+ π # Assume we are wrapped -π to π
     w = 2π / n
     return ceil.(Int, p ./ w)
 end

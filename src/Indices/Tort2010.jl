@@ -1,9 +1,7 @@
 export tort2010
 
 function tortbin(p; n=20)
-    if minimum(p) <= 0 # Assume we are wrapped -π to π
-        p .+= π
-    end
+    p = p .+ π # Assume we are wrapped -π to π
     @assert minimum(p) >= 0
     @assert maximum(p) <= 2π
     w = 2π / n

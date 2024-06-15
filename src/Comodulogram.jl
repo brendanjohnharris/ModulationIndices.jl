@@ -11,7 +11,7 @@ function comodulogram(x::AbstractVector, ::Val{:tort}; fs::Number=freqor(x, 1), 
 
     bp = [bandpass(x, fs, pass=f) |> hilbert for f in fps]
     p = [b .|> angle for b in bp]
-    p = [_p .+ π for _p in p]
+    p = [_p for _p in p]
     bs = [tortbin(_p) for _p in p]
 
     ba = [bandpass(x, fs, pass=f) |> hilbert for f in fas]

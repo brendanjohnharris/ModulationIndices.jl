@@ -32,7 +32,6 @@ The modulation index of Tort et al. 2010, "Measuring Phase-Amplitude Coupling Be
 """
 function tort2010(x::AbstractVector; fs::Number=1, fₚ, fₐ, dp, da)
     p = bandpass(x, fs, pass=[fₚ - dp, fₚ + dp]) |> hilbert .|> angle
-    p = p .+ π
     a = bandpass(x, fs, pass=[fₐ - da, fₐ + da]) |> hilbert .|> abs
     return tort2010(p, a; n=20)
 end

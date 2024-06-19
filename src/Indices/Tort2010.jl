@@ -1,11 +1,12 @@
 export tort2010
 
-function tortbin(p; n=20)
-    if minimum(p) < -π || maximum(p) ≥ π
-        error("Phase values must be in the range -π to π (not $(extrema(p))")
+function tortbin(p::AbstractVector{T}; n=20)
+    pie = convert(T, π)
+    if minimum(p) < -pie || maximum(p) ≥ pie
+        throw(DomainError(extrema(p), "Phase values must be in the range -π to π"))
     end
-    p = p .+ π # Assume we are wrapped -π to π
-    w = 2π / n
+    p = p .+ pie # Assume we are wrapped -π to π
+    w = 2 * pie / n
     return ceil.(Int, p ./ w)
 end
 

@@ -1,6 +1,6 @@
 export tort2010
 
-function tortbin(p::AbstractVector{T}; n=20)
+function tortbin(p::AbstractVector{T}; n=20) where {T}
     pie = convert(T, π)
     if minimum(p) < -pie || maximum(p) ≥ pie
         throw(DomainError(extrema(p), "Phase values must be in the range -π to π"))

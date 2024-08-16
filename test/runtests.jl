@@ -11,6 +11,20 @@ using Test
     @test f(x) == o
 end
 
+@testset "Bounded by 1?" begin
+    ϕs = -pi:0.001:pi
+    ϕs = repeat(ϕs, 100)
+    rs = zeros(size(ϕs))
+    rs[0 .< ϕs .< 1 / 2pi] .= 1.0
+    @test tort2010(ϕs, rs; n=20) == 1
+
+    rs[-1/2pi.<ϕs.<1/2pi] .= 1.0
+    @test 0.7 < tort2010(ϕs, rs; n=20) < 1
+
+    rs .= abs.(randn(size(rs)))
+    @test tort2010(ϕs, rs; n=20) ≈ 0 atol = 1e-5
+end
+
 @testset "Comodulogram_Tort" begin
     x = randn(5000)
     fs = 500

@@ -21,7 +21,7 @@ end
 function _tort2010(b, a; n=20)
     h = tortprob(b, a; n)
     u = fill(1 / n, n)
-    return kldivergence(h, u, n)
+    return kldivergence(h, u, n) # n as the last argument normalizes by log(n)
 end
 
 function tort2010(p, a; n=20, kwargs...) # Bin number for each value of p

@@ -1,7 +1,7 @@
 name = "ModulationIndices"
 uuid = "4461f75b-faaf-4427-a3b2-dbd4d4c8324b"
 authors = ["brendanjohnharris <brendanjohnharris@gmail.com> and contributors"]
-version = "0.1.0"
+version = "0.2.0"
 
 [deps]
 DSP = "717857b8-e6f2-59f4-9121-6e50c889abd2"

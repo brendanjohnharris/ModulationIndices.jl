@@ -17,7 +17,7 @@ TimeseriesFeatures = "f3112013-b923-4dfa-b867-8806c885f823"
 TimeseriesSurrogates = "c804724b-8c18-5caa-8579-6025a0767c70"
 
 [compat]
-DSP = "0.7"
+DSP = "0.7, 0.8"
 DimensionalData = "0.27"
 HypothesisTests = "0.10.10, 0.11"
 MultipleTesting = "0.5, 0.6"
